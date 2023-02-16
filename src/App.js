@@ -6,6 +6,9 @@ import Login from "./pages/login/Login";
 import NotFound from "./pages/notFound/NotFound";
 import Register from "./pages/register/Register";
 import UpdateUser from "./pages/updateUser/UpdateUser";
+import Admin from "./pages/adminUser/AdminUser";
+import Agregar from "./pages/adminUser/Agregar";
+import Modificar from "./pages/adminUser/Modificar";
 
 function App() {
   return (
@@ -33,8 +36,18 @@ function App() {
         />
         <Route
           exact
-          path="/protected"
-          component={Protected}
+          path="/admin"
+          component={Admin}
+        />
+        <Route
+          exact
+          path="/admin/agregar"
+          component={Agregar}
+        />
+        <Route
+          exact
+          path="/admin/modificar"
+          component={Modificar}
         />
         <Route
           exact
