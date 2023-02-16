@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 import * as authActions from "../../redux/actions/auth";
 import { bindActionCreators } from "redux";
-
+import {FaShoppingCart }  from "react-icons/fa";
 
 import AuthService from "../../authService";
 
@@ -32,6 +32,7 @@ function UserNav(props) {
       </Navbar.Text>
       <Nav.Link as={Link} to="/login" href="/login">Sign in</Nav.Link>
       <Nav.Link as={Link} to="/register" href="/register">Register</Nav.Link>
+      <Nav.Link ><FaShoppingCart/></Nav.Link>
     </>
   )
   if (props.isAuthenticated) {
@@ -42,6 +43,7 @@ function UserNav(props) {
         </Navbar.Text>
         <Nav.Link as={Link} to={`/updateuser/${props.auth.email}`} href={`/updateuser/${props.auth.email}`}> Edit Profile</Nav.Link>
         <Nav.Link onClick={handleSignOut}>Sign Out</Nav.Link>
+        <Nav.Link ><FaShoppingCart/></Nav.Link>
       </>
     )
   }
