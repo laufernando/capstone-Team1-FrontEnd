@@ -66,10 +66,15 @@ function AgregarForm({  handleSubmit}) {
                         <InputGroup.Text>.00</InputGroup.Text>
                     </InputGroup>
                 </Form.Group>
-
-                <Button variant="primary" type="submit">
-                    Agregar
-                </Button>
+                <div className="button-group">
+                    <Button variant="primary" >
+                        Cancelar
+                    </Button> 
+                    <span>&nbsp;&nbsp;</span>
+                    <Button variant="primary" type="submit">
+                        Agregar
+                    </Button>   
+                </div>            
             </Form>
         </div>
     )

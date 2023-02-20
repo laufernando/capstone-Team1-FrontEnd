@@ -1,12 +1,22 @@
 //import the boostrap compents we will be using on this form
+import React, { useState } from 'react';
+
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
+import './Form.css'
 
-function AgregarForm({  handleSubmit}) {
+function AgregarForm({handleSubmit}) {
+
+    const [isImageLarge, setIsImageLarge] = useState(false);
 
     return (
-        <div className="AgregarForm container">
+        <div className="form-with-image">
+            
+            <img src="http://localhost:8081/public/uploads/3e4a5d6f-b4ee-4ef9-a60f-cb839f77c817.jpg" alt="Example" 
+            className={isImageLarge ? "form-image form-image-large" : "form-image"} 
+            onMouseOver={() => setIsImageLarge(true)}
+            onMouseLeave={() => setIsImageLarge(false)} />
 
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="marca">
@@ -67,9 +77,10 @@ function AgregarForm({  handleSubmit}) {
                     </InputGroup>
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
-                    Modificar
-                </Button>
+                    <Button variant="primary" type="submit">
+                        Modificar
+                    </Button>   
+
             </Form>
         </div>
     )

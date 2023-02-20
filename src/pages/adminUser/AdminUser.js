@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import DataService from "../../services/DataService";
 
 import Alert from 'react-bootstrap/Alert';
 
@@ -8,6 +9,20 @@ import Table from "../../components/tableForm/TableForm";
 
 class AdminUser extends Component {
 
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          data: [],
+        };
+    }
+
+    componentDidMount() {
+        DataService.getData().then((result) => {
+          this.setState({ data: result });
+        });
+      }
+
     render() {
         return (
             <div className="AdminUser">
@@ -15,7 +30,8 @@ class AdminUser extends Component {
                 <Header />
 
                 <h3 className="text-center" >Admin Profile</h3>
-                <Table/>
+                
+                <Table data={this.state.data}/>
 
             </div>
         )
