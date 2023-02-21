@@ -1,9 +1,10 @@
 //import the boostrap compents we will be using on this form
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import dataService from "../../services/DataService";
+
 
 function AgregarForm() {
 
@@ -14,7 +15,25 @@ function AgregarForm() {
     const [file, setFile] = useState(null);
     const [descripcion, setDescripcion] = useState("");
     const [cantidad, setCantidad] = useState("");
-    const [precio, setPrecio] = useState("");    
+    const [precio, setPrecio] = useState("");  
+
+    const [genders, setGenders]=useState([]);
+    
+    useEffect(() => {
+        dataService
+        .getGender()
+        .then((response) => {
+            setGenders(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      
+    }, []);
+
+    if (!genders) {
+        return <div>Cargando...</div>;
+    }
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -36,7 +55,17 @@ function AgregarForm() {
     };        
     const handlePrecioChange = (e) => {
         setPrecio(e.target.value);
-    };    
+    };
+    
+    function handleReset() {
+        setMarca("");
+        setGenero("");
+        setTalla("");
+        setFile(null);
+        setDescripcion("");
+        setCantidad("");
+        setPrecio("");
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -53,10 +82,14 @@ function AgregarForm() {
         for (const [key, value] of data.entries()) {
             console.log(`${key}: ${value}`);
           }
+
+        
         dataService
         .uploadFile(data)
         .then((response) => {
           console.log(response.data);
+          alert('Product added succeful');
+          handleReset();
         })
         .catch((error) => {
           console.log(error);
@@ -75,8 +108,9 @@ function AgregarForm() {
                     <Form.Label><strong>Genero:</strong></Form.Label>
                     <Form.Control  as="select" id="genero" aria-label="Default select example" value={genero} onChange={handleGeneroChange}>
                         <option>Selecciona el Genero</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="Femenino">Femenino</option>
+                        {genders.map(option => (
+                        <option key={option._id} value={option.gender}>{option.gender}</option>
+                        ))}
                     </Form.Control >
                 </Form.Group>
                 <Form.Group controlId="talla">

@@ -35,7 +35,20 @@ class DataService {
         console.error(error);
         return [];
       }
-    } 
+    }
+
+    static async getGender() {
+      const apiURL = process.env.REACT_APP_API_URL;
+      try {
+          console.log('Se obtienen los generos')
+          const response = await axios.get(`${apiURL}/api/gender`);
+          console.log(response.data);
+          return response.data;
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
+  }    
 }
 
 export default DataService;

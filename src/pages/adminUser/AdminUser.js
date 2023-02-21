@@ -8,6 +8,7 @@ import Header from "../../components/header/Header";
 
 import Table from "../../components/tableForm/TableForm";
 import ModificarForm from "../../components/agregarForm/ModificarForm";
+import AgregarForm from "../../components/agregarForm/AgregarForm";
 
 class AdminUser extends Component {
 
@@ -37,11 +38,12 @@ class AdminUser extends Component {
                         <Route path="/admin/modificar/:id">
                             <ModificarForm />
                         </Route>
+                        <Route path="/admin/agregar/">
+                            <AgregarForm />
+                        </Route>                        
                         <Table data={this.state.data}/>
                     </Switch>
-                </Router>
-                
-
+                </Router>                
             </div>
         )
     }

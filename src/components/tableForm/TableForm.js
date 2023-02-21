@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import { withRouter } from "react-router-dom";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Redirect } from "react-router-dom";
+import dataService from "../../services/DataService";
 import Modal from '../header/AgregarModal';
 
 class TableForm extends Component {
@@ -32,9 +33,8 @@ class TableForm extends Component {
   }
 
   handleButtonClick() {
-    this.setState({
-      shouldRedirectNew: true,
-    });
+
+    this.props.history.push(`/admin/agregar/`);
   }
 
   handleButtonClickEdith() {

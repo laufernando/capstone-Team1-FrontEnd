@@ -9,6 +9,7 @@ import './Form.css'
 
 const AgregarForm = (props) => {
     const [data, setData] = useState(null);
+    const [genders, setGenders]=useState([]);
 
     useEffect(() => {
         const { history, match } = props;
@@ -17,14 +18,21 @@ const AgregarForm = (props) => {
         DataService.getDataById(id).then((result) => {
             setData(result);
           });
-        console.log(data)
+          DataService
+          .getGender()
+          .then((response) => {
+              setGenders(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
     }, []);
 
     const [isImageLarge, setIsImageLarge] = useState(false);
 
     if (!data) {
         return <div>Cargando...</div>;
-      }
+    }
 
     return (
         <div className="form-with-image">
@@ -44,8 +52,9 @@ const AgregarForm = (props) => {
                     <Form.Label><strong>Genero:</strong></Form.Label>
                     <Form.Control  as="select" id="genero" aria-label="Default select example" >
                         <option>Selecciona el Genero</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="Femenino">Femenino</option>
+                        {genders.map(option => (
+                        <option key={option._id} value={option.gender}>{option.gender}</option>
+                        ))}
                     </Form.Control >
                 </Form.Group>
                 <Form.Group controlId="talla">
