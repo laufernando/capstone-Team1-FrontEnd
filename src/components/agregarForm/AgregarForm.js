@@ -18,12 +18,22 @@ function AgregarForm() {
     const [precio, setPrecio] = useState("");  
 
     const [genders, setGenders]=useState([]);
+    const [sizes, setSizes]=useState([]);
     
     useEffect(() => {
         dataService
         .getGender()
         .then((response) => {
             setGenders(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+        dataService
+        .getSize()
+        .then((response) => {
+            setSizes(response);
         })
         .catch((error) => {
           console.log(error);
@@ -117,21 +127,9 @@ function AgregarForm() {
                     <Form.Label><strong>Talla:</strong></Form.Label>
                     <Form.Control as="select" id="talla"  aria-label="Default select example" value={talla} onChange={handleTallaChange}>
                         <option>Selecciona la Talla</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                        <option value="23">23</option>
-                        <option value="24">24</option>
-                        <option value="25">25</option>
-                        <option value="26">26</option>
-                        <option value="27">27</option>
-                        <option value="28">28</option>
-                        <option value="29">29</option>
-                        <option value="30">30</option>
-                        <option value="31">31</option>
+                        {sizes.map(option => (
+                        <option key={option._id} value={option.size}>{option.size}</option>
+                        ))}
                     </Form.Control >
                 </Form.Group>
 
