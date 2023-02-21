@@ -1,27 +1,44 @@
 //import the boostrap compents we will be using on this form
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import { useParams, withRouter  } from 'react-router-dom';
+import DataService from "../../services/DataService";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import './Form.css'
 
-function AgregarForm({handleSubmit}) {
+const AgregarForm = (props) => {
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        const { history, match } = props;
+        const id = match.params.id;
+        console.log('id '+id)
+        DataService.getDataById(id).then((result) => {
+            setData(result);
+          });
+        console.log(data)
+    }, []);
 
     const [isImageLarge, setIsImageLarge] = useState(false);
+
+    if (!data) {
+        return <div>Cargando...</div>;
+      }
 
     return (
         <div className="form-with-image">
             
-            <img src="http://localhost:8081/public/uploads/3e4a5d6f-b4ee-4ef9-a60f-cb839f77c817.jpg" alt="Example" 
+            <img src={data.img} alt="Example" 
             className={isImageLarge ? "form-image form-image-large" : "form-image"} 
             onMouseOver={() => setIsImageLarge(true)}
             onMouseLeave={() => setIsImageLarge(false)} />
 
-            <Form onSubmit={handleSubmit}>
+
+            <Form >
                 <Form.Group controlId="marca">
                     <Form.Label><strong>Marca:</strong></Form.Label>
-                    <Form.Control required minLength="2"  type="text" placeholder="Marca" />
+                    <Form.Control required minLength="2" value={data.marca} type="text" placeholder="Marca" />
                 </Form.Group>
                 <Form.Group controlId="genero">
                     <Form.Label><strong>Genero:</strong></Form.Label>
@@ -60,19 +77,19 @@ function AgregarForm({handleSubmit}) {
 
                 <Form.Group controlId="descripcion">
                     <Form.Label><strong>Descripcion:</strong></Form.Label>
-                    <Form.Control required minLength="2"  type="text" placeholder="Descripcion" />
+                    <Form.Control required minLength="2"  type="text" value={data.descripcion} placeholder="Descripcion" />
                 </Form.Group>
 
                 <Form.Group controlId="cantidad">
                     <Form.Label><strong>Cantidad</strong></Form.Label>
-                    <Form.Control required minLength="2"  type="text" placeholder="Cantidad" />
+                    <Form.Control required minLength="2"  type="text" value={data.cantidad} placeholder="Cantidad" />
                 </Form.Group>
 
                 <Form.Group controlId="precio">
                     <Form.Label><strong>Precio:</strong></Form.Label>
                     <InputGroup className="mb-3">
                         <InputGroup.Text>$</InputGroup.Text>
-                        <Form.Control aria-label="Amount (to the nearest dollar)" />
+                        <Form.Control aria-label="Amount (to the nearest dollar)" value={data.precio} />
                         <InputGroup.Text>.00</InputGroup.Text>
                     </InputGroup>
                 </Form.Group>
@@ -87,4 +104,4 @@ function AgregarForm({handleSubmit}) {
 
 }
 
-export default AgregarForm
+export default withRouter(AgregarForm)

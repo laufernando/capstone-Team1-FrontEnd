@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
+import { withRouter } from "react-router-dom";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Redirect } from "react-router-dom";
 import Modal from '../header/AgregarModal';
@@ -42,25 +43,6 @@ class TableForm extends Component {
     });
   }  
 
-  componentWillMount() {
-    /*const apiURL = process.env.REACT_APP_API_URL;
-    console.log(apiURL);
-
-    const res =  fetch(`${apiURL}/api/sneaker`,{
-                           method: "GET",
-                           headers: {
-                          "Accept": "application/json",
-                          "Content-Type": "application/json"
-                          }
-                        })
-  .then(response => response.json())
-                     .then(json => {console.log(json);
-                     })
-  .catch(ex => {
-  console.error(ex);
-})*/
-  }
-
   handleOpenModal() {
     console.log('Hace algo')
     this.setState({ isModalOpen: true });
@@ -69,6 +51,11 @@ class TableForm extends Component {
   handleCloseModal() {
     this.setState({ isModalOpen: false });
   }
+
+   handleEdit = (id) => {
+    console.log(id);
+    this.props.history.push(`/admin/modificar/${id}`);
+  };
 
   render() {
     if (this.state.shouldRedirectNew) {
@@ -105,7 +92,7 @@ class TableForm extends Component {
           </thead>
           <tbody>
           {data.map((item, index) => (
-            <tr key={index}>
+            <tr key={item._id}>
               <td>{index}</td>
               <td>{item.marca}</td>
               <td>{item.genero}</td>
@@ -115,7 +102,7 @@ class TableForm extends Component {
               <td>{item.cantidad}</td>
               <td>{item.precio}</td>
               <td>
-                <Button variant="light" onClick={this.handleButtonClickEdith}>
+                <Button variant="light" onClick={() => this.handleEdit(item._id)}>
                   <FaEdit />
                 </Button>
                 <Button variant="light">
@@ -131,4 +118,4 @@ class TableForm extends Component {
   }
 }
 
-export default TableForm;
+export default  withRouter(TableForm);
