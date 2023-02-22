@@ -9,6 +9,8 @@ import Header from "../../components/header/Header";
 import Table from "../../components/tableForm/TableForm";
 import ModificarForm from "../../components/agregarForm/ModificarForm";
 import AgregarForm from "../../components/agregarForm/AgregarForm";
+import { isAuthenticated } from "../../utils/authHelper";
+import mustBeAuthenticated from "../../redux/hoc/mustBeAuthenticated";
 
 class AdminUser extends Component {
 
@@ -46,7 +48,7 @@ class AdminUser extends Component {
         return (
             <div className="AdminUser">
 
-                <Header />
+                <Header isAuthenticated={isAuthenticated()}/>
 
                 <h3 className="text-center" >Admin Profile</h3>
                 <Router>
@@ -65,4 +67,4 @@ class AdminUser extends Component {
     }
 }
 
-export default  AdminUser
+export default  mustBeAuthenticated(AdminUser);

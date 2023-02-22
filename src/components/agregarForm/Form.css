@@ -71,7 +71,7 @@
   }
 
   .form-image-large {
-    transform: scale(1.5);
+    transform: scale(1.1);
   }
   
   @media (max-width: 768px) {
