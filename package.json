@@ -13,12 +13,9 @@
     "react-bootstrap": "^1.6.0",
     "react-dom": "^17.0.2",
     "react-icons": "^4.7.1",
-<<<<<<< HEAD
     "react-multi-carousel": "^2.8.2",
-=======
     "react-modal": "^3.16.1",
     "react-paginate": "^8.1.4",
->>>>>>> 48fdc59e0cc00643b27863fe067d0c71da0f39dc
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
