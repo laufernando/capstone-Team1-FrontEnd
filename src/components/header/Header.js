@@ -2,13 +2,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { Link, withRouter } from 'react-router-dom';
 import UserNav from './UserNav';
-
+import '../../css/nav-style.css';
+import Logo from '../../images/shoe.png';
+import { GiRunningShoe } from "react-icons/gi";
 function Header(props) {
 
   return (
     <div className="Navbar mb-3">
-      <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
-        <Navbar.Brand as={Link} to="/">Capstone React FE</Navbar.Brand>
+      <Navbar className="color-nav" variant="dark" expand="lg" fixed="top">
+        <Navbar.Brand as={Link} to="/"><img width="95px" height="40px"  src={Logo}/> Sneaker Fever</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav activeKey={props.location.pathname} className="ml-auto">

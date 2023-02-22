@@ -1,0 +1,11 @@
+.color-nav {
+    background: #22c1c3;
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+}
+
+
+.nav-link{
+    font-family: 'Quicksand', sans-serif;
+    color: white !important;
+  }
