@@ -30,7 +30,7 @@ function UserNav(props) {
       <Navbar.Text className="font-weight-bold mx-3">
         Welcome, Guest
       </Navbar.Text>
-      <Nav.Link as={Link} to="/login" href="/login">Sign in</Nav.Link>
+      <Nav.Link as={Link} to="/login" href="/login" >Sign in</Nav.Link>
       <Nav.Link as={Link} to="/register" href="/register">Register</Nav.Link>
       <Nav.Link ><FaShoppingCart/></Nav.Link>
     </>
@@ -38,7 +38,7 @@ function UserNav(props) {
   if (props.isAuthenticated) {
     userNav = (
       <>
-        <Navbar.Text className="font-weight-bold mx-3">
+        <Navbar.Text className="font-weight-bold mx-3 texto" color="black">
           Hello, {props.auth.email}
         </Navbar.Text>
         <Nav.Link as={Link} to={`/updateuser/${props.auth.email}`} href={`/updateuser/${props.auth.email}`}> Edit Profile</Nav.Link>
