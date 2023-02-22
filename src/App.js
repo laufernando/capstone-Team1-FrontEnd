@@ -9,6 +9,7 @@ import UpdateUser from "./pages/updateUser/UpdateUser";
 import Admin from "./pages/adminUser/AdminUser";
 import Agregar from "./pages/adminUser/Agregar";
 import Modificar from "./pages/adminUser/Modificar";
+import Shop from "./pages/buy/Buy";
 import GenderCatalog from "./pages/adminUser/AdminGender";
 import AgregarGender from "./pages/adminUser/AgregarGender";
 import "./css/body.css";
@@ -52,6 +53,11 @@ function App() {
           exact
           path="/admin/modificar"
           component={Modificar}
+        />
+        <Route
+          exact
+          path="/shop"
+          component={Shop}
         />
         <Route
           exact
