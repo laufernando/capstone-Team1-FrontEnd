@@ -11,7 +11,7 @@ import Agregar from "./pages/adminUser/Agregar";
 import Modificar from "./pages/adminUser/Modificar";
 import GenderCatalog from "./pages/adminUser/AdminGender";
 import AgregarGender from "./pages/adminUser/AgregarGender";
-import "./css/body.css"
+import "./css/body.css";
 
 
 function App() {
