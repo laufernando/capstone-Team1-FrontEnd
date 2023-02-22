@@ -116,7 +116,7 @@ function AgregarForm() {
                 </Form.Group>
                 <Form.Group controlId="genero">
                     <Form.Label><strong>Genero:</strong></Form.Label>
-                    <Form.Control  as="select" id="genero" aria-label="Default select example" value={genero} onChange={handleGeneroChange}>
+                    <Form.Control required as="select" id="genero" aria-label="Default select example" value={genero} onChange={handleGeneroChange}>
                         <option>Selecciona el Genero</option>
                         {genders.map(option => (
                         <option key={option._id} value={option.gender}>{option.gender}</option>
@@ -125,7 +125,7 @@ function AgregarForm() {
                 </Form.Group>
                 <Form.Group controlId="talla">
                     <Form.Label><strong>Talla:</strong></Form.Label>
-                    <Form.Control as="select" id="talla"  aria-label="Default select example" value={talla} onChange={handleTallaChange}>
+                    <Form.Control required as="select" id="talla"  aria-label="Default select example" value={talla} onChange={handleTallaChange}>
                         <option>Selecciona la Talla</option>
                         {sizes.map(option => (
                         <option key={option._id} value={option.size}>{option.size}</option>
@@ -135,7 +135,7 @@ function AgregarForm() {
 
                 <Form.Group controlId="img" className="mb-3">
                     <Form.Label><strong>Imagen:</strong></Form.Label>
-                    <Form.Control type="file"  onChange={handleFileChange} />
+                    <Form.Control required type="file"  onChange={handleFileChange} />
                 </Form.Group>
 
                 <Form.Group controlId="descripcion">
@@ -152,7 +152,7 @@ function AgregarForm() {
                     <Form.Label><strong>Precio:</strong></Form.Label>
                     <InputGroup className="mb-3">
                         <InputGroup.Text>$</InputGroup.Text>
-                        <Form.Control aria-label="Amount (to the nearest dollar)" value={precio} onChange={handlePrecioChange}/>
+                        <Form.Control required aria-label="Amount (to the nearest dollar)" value={precio} onChange={handlePrecioChange}/>
                         <InputGroup.Text>.00</InputGroup.Text>
                     </InputGroup>
                 </Form.Group>

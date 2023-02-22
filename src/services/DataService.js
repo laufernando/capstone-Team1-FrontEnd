@@ -1,4 +1,5 @@
 import axios from "axios";
+import { generateAuthHeader } from "../utils/authHelper";
 
 class DataService {
     
@@ -70,6 +71,15 @@ class DataService {
         "Content-Type": "multipart/form-data",
       },
     });
+  } 
+  
+  static async deleteSneaker(id) {
+    const apiURL = process.env.REACT_APP_API_URL;
+    return await axios.delete(`${apiURL}/api/sneaker/${id}`, {
+      headers: {
+        ...generateAuthHeader()
+      },
+    });   
   }   
 }
 

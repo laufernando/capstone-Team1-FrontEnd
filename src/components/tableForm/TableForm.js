@@ -2,9 +2,11 @@
 import React, { Component } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
+import { DropdownButton, Dropdown } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Redirect } from "react-router-dom";
+import ReactPaginate from 'react-paginate';
 import dataService from "../../services/DataService";
 import Modal from '../header/AgregarModal';
 
@@ -22,6 +24,8 @@ class TableForm extends Component {
         cantidad: "",
         precio: "",
       },
+      data:[],
+      currentPage: 0,      
       shouldRedirectNew: false,
       shouldRedirectEdith: false,
       isModalOpen: false,
@@ -52,9 +56,13 @@ class TableForm extends Component {
     this.setState({ isModalOpen: false });
   }
 
-   handleEdit = (id) => {
+  handleEdit = (id) => {
     console.log(id);
     this.props.history.push(`/admin/modificar/${id}`);
+  };
+
+  handleDelete = (id) => {
+    this.props.onDelete(id);
   };
 
   render() {
@@ -79,40 +87,43 @@ class TableForm extends Component {
         <Table striped bordered hover size="sm">
           <thead>
             <tr>
-              <th>#</th>
+              <th></th>
               <th>Marca</th>
               <th>Genero</th>
               <th>Talla</th>
-              <th>Url Imagen</th>
               <th>Descripcion</th>
               <th>Cantidad</th>
               <th>Precio</th>
-              <th>Editar</th>
+              <th>Opciones</th>
             </tr>
           </thead>
           <tbody>
           {data.map((item, index) => (
             <tr key={item._id}>
-              <td>{index}</td>
+              <td>
+                <img
+                  src={item.img}
+                  alt={item.marca}
+                  style={{ maxWidth: 60, display: "block", margin: "0 auto" }}
+                />                
+              </td>
               <td>{item.marca}</td>
               <td>{item.genero}</td>
               <td>{item.talla}</td>
-              <td>{item.img}</td>
               <td>{item.descripcion}</td>
               <td>{item.cantidad}</td>
               <td>{item.precio}</td>
-              <td>
-                <Button variant="light" onClick={() => this.handleEdit(item._id)}>
-                  <FaEdit />
-                </Button>
-                <Button variant="light">
-                  <FaTrashAlt />
-                </Button>
-              </td>              
+              <td style={{ textAlign: "center" }}>
+                <DropdownButton variant="secondary" title="" id="dropdown-menu">
+                  <Dropdown.Item onClick={() => this.handleEdit(item._id)} className="dropdown-item-small">Edit   <FaEdit /></Dropdown.Item>
+                  <Dropdown.Item onClick={() => this.handleDelete(item._id)} className="dropdown-item-small">Delete <FaTrashAlt /></Dropdown.Item>
+                </DropdownButton>{' '}
+            </td>             
             </tr>
           ))}
           </tbody>
         </Table>
+        
       </div>
     );
   }

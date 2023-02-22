@@ -26,6 +26,22 @@ class AdminUser extends Component {
         });
     }
 
+    handleDelete = (id) => {
+        console.log(id);
+        DataService
+        .deleteSneaker(id)
+        .then((response) => {
+          console.log(response.data);
+          alert('Product deleted succeful');
+          DataService.getData().then((result) => {
+            this.setState({ data: result });
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      };
+
     render() {
         return (
             <div className="AdminUser">
@@ -41,7 +57,7 @@ class AdminUser extends Component {
                         <Route path="/admin/agregar/">
                             <AgregarForm />
                         </Route>                        
-                        <Table data={this.state.data}/>
+                        <Table data={this.state.data} onDelete={this.handleDelete}/>
                     </Switch>
                 </Router>                
             </div>
