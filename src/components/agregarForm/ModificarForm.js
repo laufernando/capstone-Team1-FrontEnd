@@ -76,6 +76,11 @@ const ModificarForm = (props) => {
         setPrecio(e.target.value);
     };
 
+    const handleClickCancel = () => {
+        const { history, match } = props;
+        history.push("/admin");
+    };
+
     const [isImageLarge, setIsImageLarge] = useState(false);
 
     if (!data) {
@@ -169,11 +174,17 @@ const ModificarForm = (props) => {
                         <InputGroup.Text>.00</InputGroup.Text>
                     </InputGroup>
                 </Form.Group>
-
-                    <Button variant="primary" type="submit">
+                <div className="form-row">
+                    <div className="form-group col-md-12">  
+                    <Button className="btn btn-secondary" onClick={handleClickCancel}>
+                        Cancelar
+                    </Button>
+                    <span>&nbsp;&nbsp;</span>                  
+                    <Button type="submit" className="btn btn-primary mr-2">
                         Modificar
-                    </Button>   
-
+                    </Button> 
+                    </div>
+                </div>
             </Form>
         </div>
     )

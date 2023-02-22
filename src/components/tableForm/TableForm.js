@@ -77,11 +77,13 @@ class TableForm extends Component {
     const { data } = this.props;
 
     return (
-      <div className="TableForm container">
+      <div className="container">
         <br />
-        <Button variant="primary" onClick={this.handleButtonClick}>
+        <div className="d-flex justify-content-between align-items-center">
+        <Button  onClick={this.handleButtonClick} className="btn btn-secondary text-right">
           Agregar Nuevo Producto
         </Button>
+        </div>
         <br />
         <br />
         <Table striped bordered hover size="sm">

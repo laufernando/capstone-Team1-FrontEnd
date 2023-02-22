@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import dataService from "../../services/DataService";
+import { useHistory } from "react-router-dom";
 
 
 function AgregarForm() {
@@ -19,7 +20,8 @@ function AgregarForm() {
 
     const [genders, setGenders]=useState([]);
     const [sizes, setSizes]=useState([]);
-    
+    const history = useHistory();
+
     useEffect(() => {
         dataService
         .getGender()
@@ -106,6 +108,10 @@ function AgregarForm() {
         });
     }
 
+    const handleClickCancel = () => {
+        history.push("/admin");
+    };
+
     return (
         <div className="AgregarForm container">
 
@@ -157,7 +163,7 @@ function AgregarForm() {
                     </InputGroup>
                 </Form.Group>
                 <div className="button-group">
-                    <Button variant="primary" >
+                    <Button variant="primary" onClick={handleClickCancel}>
                         Cancelar
                     </Button> 
                     <span>&nbsp;&nbsp;</span>
