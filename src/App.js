@@ -9,6 +9,7 @@ import UpdateUser from "./pages/updateUser/UpdateUser";
 import Admin from "./pages/adminUser/AdminUser";
 import Agregar from "./pages/adminUser/Agregar";
 import Modificar from "./pages/adminUser/Modificar";
+import Shop from "./pages/buy/Buy";
 
 function App() {
   return (
@@ -49,6 +50,11 @@ function App() {
           path="/admin/modificar"
           component={Modificar}
         />
+        <Route
+          exact
+          path="/shop"
+          component={Shop}
+        />         
         <Route
           exact
           path="*"

@@ -1,0 +1,17 @@
+.roomfac {
+    display: flex;
+    widtH: 60%;
+    margin: auto;
+}
+
+.carousel-control-prev-icon {
+    background-color: black;
+    background-size: 100%, 100%;
+    border-radius: 50%;
+}
+
+.carousel-control-next-icon {
+    background-color: black;
+    background-size: 100%, 100%;
+    border-radius: 50%;
+}

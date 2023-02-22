@@ -42,6 +42,7 @@ function UserNav(props) {
           Hello, {props.auth.email}
         </Navbar.Text>
         <Nav.Link as={Link} to={`/updateuser/${props.auth.email}`} href={`/updateuser/${props.auth.email}`}> Edit Profile</Nav.Link>
+        <Nav.Link as={Link} to={`/admin`} href={`/admin`}> Admin Sneaker</Nav.Link>
         <Nav.Link onClick={handleSignOut}>Sign Out</Nav.Link>
         <Nav.Link ><FaShoppingCart/></Nav.Link>
       </>

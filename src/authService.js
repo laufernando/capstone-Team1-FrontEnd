@@ -17,7 +17,6 @@ class APIService {
         };
         return this.client.get(`${this.url}/auth/logout`, config);
     }
-
 }
 
 export default APIService;
