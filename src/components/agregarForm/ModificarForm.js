@@ -112,6 +112,7 @@ const ModificarForm = (props) => {
           setDescripcion(response.data.descripcion);
           setCantidad(response.data.cantidad);
           setPrecio(response.data.precio);
+          props.updateData();
         })
         .catch((error) => {
           console.log(error);
@@ -134,7 +135,7 @@ const ModificarForm = (props) => {
                 </Form.Group>
                 <Form.Group controlId="genero">
                     <Form.Label><strong>Genero:</strong></Form.Label>
-                    <Form.Control  as="select" id="genero" value={genero} onChange={handleGeneroChange} >
+                    <Form.Control  as="select" value={genero} onChange={handleGeneroChange} >
                         <option>Selecciona el Genero</option>
                         {genders.map(option => (
                         <option key={option._id} value={option.gender}>{option.gender}</option>
@@ -143,7 +144,7 @@ const ModificarForm = (props) => {
                 </Form.Group>
                 <Form.Group controlId="talla">
                     <Form.Label><strong>Talla:</strong></Form.Label>
-                    <Form.Control as="select" id="talla" value={talla} onChange={handleTallaChange}>
+                    <Form.Control as="select" value={talla} onChange={handleTallaChange}>
                         <option>Selecciona la Talla</option>
                         {sizes.map(option => (
                         <option key={option._id} value={option.size}>{option.size}</option>

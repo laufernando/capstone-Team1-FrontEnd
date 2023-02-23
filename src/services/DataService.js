@@ -80,7 +80,17 @@ class DataService {
         ...generateAuthHeader()
       },
     });   
-  }   
+  } 
+  
+  static async sendMail(data) {
+    const apiURL = process.env.REACT_APP_API_URL;
+    return await axios.post(`${apiURL}/api/mail`, data, {
+      headers: {
+        "accept": "application/json",
+        "Content-Type": "application/json",
+      },
+    });   
+  } 
 }
 
 export default DataService;

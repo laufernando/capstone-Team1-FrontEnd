@@ -3,12 +3,12 @@ import React, { Component } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import { DropdownButton, Dropdown } from 'react-bootstrap';
-import { withRouter } from "react-router-dom";
+import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
-import { Redirect } from "react-router-dom";
 import ReactPaginate from 'react-paginate';
 import dataService from "../../services/DataService";
 import Modal from '../header/AgregarModal';
+import AgregarForm from "../agregarForm/AgregarForm";
 
 class TableForm extends Component {
   constructor(props) {
@@ -36,9 +36,15 @@ class TableForm extends Component {
     this.handleButtonClickEdith = this.handleButtonClickEdith.bind(this);
   }
 
-  handleButtonClick() {
 
-    this.props.history.push(`/admin/agregar/`);
+
+  handleButtonClick() {
+    this.props.history.push(`/admin/agregar`);
+
+  /*    this.props.history.push({
+        pathname: `/admin/agregar`,
+        state: { updateData: this.props.updateData() }
+      });*/
   }
 
   handleButtonClickEdith() {
@@ -66,13 +72,7 @@ class TableForm extends Component {
   };
 
   render() {
-    if (this.state.shouldRedirectNew) {
-      return <Redirect to="/admin/agregar" />;
-    }
 
-    if (this.state.shouldRedirectEdith) {
-        return <Redirect to="/admin/modificar" />;
-    }
 
     const { data } = this.props;
 
@@ -83,6 +83,9 @@ class TableForm extends Component {
         <Button  onClick={this.handleButtonClick} className="btn btn-secondary text-right">
           Agregar Nuevo Producto
         </Button>
+        <Switch>
+          <Route path="/admin/agregar" component={AgregarForm} />
+        </Switch>
         </div>
         <br />
         <br />

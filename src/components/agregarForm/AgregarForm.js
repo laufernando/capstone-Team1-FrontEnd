@@ -4,10 +4,10 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import dataService from "../../services/DataService";
-import { useHistory } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 
 
-function AgregarForm() {
+const AgregarForm = (props) => {
 
     
     const [marca, setMarca] = useState("");
@@ -89,7 +89,8 @@ function AgregarForm() {
         data.append("descripcion", descripcion);
         data.append("cantidad", cantidad);
         data.append("precio", precio);
-
+        
+        console.log(data);
         
         for (const [key, value] of data.entries()) {
             console.log(`${key}: ${value}`);
@@ -102,10 +103,28 @@ function AgregarForm() {
           console.log(response.data);
           alert('Product added succeful');
           handleReset();
+          props.updateData();
+          //history.push("/admin");
         })
         .catch((error) => {
           console.log(error);
         });
+
+        const objMail = {
+            para: 'edgar.martinez@libertyfianzas.com',
+            asunto: 'prueba',
+            mensaje: 'que tal'
+          };
+        
+        /*dataService.sendMail(objMail)
+        .then((response) => {
+            console.log(response.data);
+            alert('Send mail succeful');
+          })
+          .catch((error) => {
+            console.log(error);
+          });   */       
+          
     }
 
     const handleClickCancel = () => {
@@ -122,7 +141,7 @@ function AgregarForm() {
                 </Form.Group>
                 <Form.Group controlId="genero">
                     <Form.Label><strong>Genero:</strong></Form.Label>
-                    <Form.Control required as="select" id="genero" aria-label="Default select example" value={genero} onChange={handleGeneroChange}>
+                    <Form.Control required as="select"  aria-label="Default select example" value={genero} onChange={handleGeneroChange}>
                         <option>Selecciona el Genero</option>
                         {genders.map(option => (
                         <option key={option._id} value={option.gender}>{option.gender}</option>
@@ -131,7 +150,7 @@ function AgregarForm() {
                 </Form.Group>
                 <Form.Group controlId="talla">
                     <Form.Label><strong>Talla:</strong></Form.Label>
-                    <Form.Control required as="select" id="talla"  aria-label="Default select example" value={talla} onChange={handleTallaChange}>
+                    <Form.Control required as="select" aria-label="Default select example" value={talla} onChange={handleTallaChange}>
                         <option>Selecciona la Talla</option>
                         {sizes.map(option => (
                         <option key={option._id} value={option.size}>{option.size}</option>
@@ -177,4 +196,4 @@ function AgregarForm() {
 
 }
 
-export default AgregarForm
+export default withRouter(AgregarForm)

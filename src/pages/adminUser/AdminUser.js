@@ -22,9 +22,21 @@ class AdminUser extends Component {
         };
     }
 
-    componentDidMount() {
+    updateData = () => {
+        console.log('Ejecuta esta funcion')
         DataService.getData().then((result) => {
-          this.setState({ data: result });
+            this.setState({ data: result });
+        });
+        console.log('Actualiza el estado')
+    }
+
+    componentDidMount() {
+        this.chargeData();
+    }
+
+    chargeData = () => {
+        DataService.getData().then((result) => {
+            this.setState({ data: result });
         });
     }
 
@@ -33,16 +45,16 @@ class AdminUser extends Component {
         DataService
         .deleteSneaker(id)
         .then((response) => {
-          console.log(response.data);
-          alert('Product deleted succeful');
-          DataService.getData().then((result) => {
-            this.setState({ data: result });
-          });
+            console.log(response.data);
+            alert('Product deleted succeful');
+            DataService.getData().then((result) => {
+                this.setState({ data: result });
+            });
         })
         .catch((error) => {
-          console.log(error);
+            console.log(error);
         });
-      };
+    };
 
     render() {
         return (
@@ -54,12 +66,20 @@ class AdminUser extends Component {
                 <Router>
                     <Switch>
                         <Route path="/admin/modificar/:id">
-                            <ModificarForm />
-                        </Route>
-                        <Route path="/admin/agregar/">
-                            <AgregarForm />
+                            <ModificarForm 
+                            {...this.props}
+                            data={this.state.data}
+                            updateData={this.updateData}                            
+                            />
                         </Route>                        
-                        <Table data={this.state.data} onDelete={this.handleDelete}/>
+                        <Route path="/admin/agregar">
+                            <AgregarForm 
+                            {...this.props}
+                            data={this.state.data}
+                            updateData={this.updateData}
+                            />
+                        </Route>                                                 
+                        <Table data={this.state.data} onDelete={this.handleDelete} {...this.props} updateData={this.updateData}/>
                     </Switch>
                 </Router>                
             </div>
