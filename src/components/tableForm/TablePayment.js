@@ -2,7 +2,7 @@
 import React, { Component, useRef } from 'react';
 import { Table, Button, Modal, Form } from 'react-bootstrap';
 import { FaPlusSquare, FaTrashAlt } from "react-icons/fa";
-import GenderForm from '../agregarForm/GenderForm'
+import PaymentForm from '../agregarForm/PaymentForm';
 import '../../css/table-style.css'
 import DataService from '../../services/CatalogService';
 
@@ -15,7 +15,7 @@ class TableGender extends Component {
             errorMessage: null,
             formData: {
                 id: "",
-                genero: "",
+                paymentMethod: "",
             },
             data: [],
             isOpen: false,
@@ -38,7 +38,7 @@ class TableGender extends Component {
     handleDeleteData(id) {
         this.props.onDelete(id);
 
-        alert("Eliminando genero con id: " + id);
+        alert("Eliminando metodo con id: " + id);
 
     }
 
@@ -54,9 +54,9 @@ class TableGender extends Component {
 
         const handleSubmit = (e) => {
             // e.preventDefault();
-            const genero = e.target[0].value;
-            const datos = JSON.stringify({ gender: genero });
-            DataService.postGenderData(datos)
+            const metodo = e.target[0].value;
+            const datos = JSON.stringify({ paymentMethod: metodo });
+            DataService.postPaymentData(datos)
             console.log("datos: " + datos)
             this.handleCloseModal();
         }
@@ -72,7 +72,7 @@ class TableGender extends Component {
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Género</th>
+                                <th>Método de Pago</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -80,7 +80,7 @@ class TableGender extends Component {
                             {data.map((item, index) => (
                                 <tr key={index}>
                                     <td>{item._id}</td>
-                                    <td>{item.gender}</td>
+                                    <td>{item.paymentMethod}</td>
                                     <td>
                                         <Button variant="primary" style={{ margin: "10px" }} onClick={() => this.handleDeleteData(item._id)} >
                                             <FaTrashAlt />
@@ -95,7 +95,7 @@ class TableGender extends Component {
                     <Modal.Header closeButton>
                     </Modal.Header>
                     <Modal.Body>
-                        <GenderForm handleSubmit={handleSubmit} />
+                        <PaymentForm handleSubmit={handleSubmit} />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="primary" type="submit" form="myForm">
@@ -104,6 +104,7 @@ class TableGender extends Component {
                     </Modal.Footer>
                 </Modal>
             </>
+
         )
     }
 }
