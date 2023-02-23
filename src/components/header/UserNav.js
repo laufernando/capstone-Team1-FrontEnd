@@ -46,12 +46,12 @@ function UserNav(props) {
         <Nav.Link as={Link} to={``} href={`/admin`}> </Nav.Link>
         <Dropdown>
           <Dropdown.Toggle variant="success" className='btn-primary'>
-             Admin Sneaker
+             Admin
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item href="/admin">Admin Console</Dropdown.Item>
-            <Dropdown.Item href="/admin/gender">Admin Gender</Dropdown.Item>
-            <Dropdown.Item href="/admin/payment">Admin Payment Method</Dropdown.Item>
+            <Dropdown.Item href="/admin">Sneaker</Dropdown.Item>
+            <Dropdown.Item href="/admin/gender">Gender</Dropdown.Item>
+            <Dropdown.Item href="/admin/payment">Payment Method</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
         <Nav.Link onClick={handleSignOut}>Sign Out</Nav.Link>
