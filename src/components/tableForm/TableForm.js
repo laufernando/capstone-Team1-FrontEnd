@@ -4,11 +4,12 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import { DropdownButton, Dropdown } from 'react-bootstrap';
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { FaEdit, FaTrashAlt, FaPlusSquare } from "react-icons/fa";
 import ReactPaginate from 'react-paginate';
 import dataService from "../../services/DataService";
 import Modal from '../header/AgregarModal';
 import AgregarForm from "../agregarForm/AgregarForm";
+
 
 class TableForm extends Component {
   constructor(props) {
@@ -24,11 +25,13 @@ class TableForm extends Component {
         cantidad: "",
         precio: "",
       },
-      data:[],
+      filteredData: this.props.data,
       currentPage: 0,      
       shouldRedirectNew: false,
       shouldRedirectEdith: false,
       isModalOpen: false,
+      searchTerm: "",
+      isOpen: false,
     };
     this.handleButtonClick = this.handleButtonClick.bind(this);
     this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -36,7 +39,30 @@ class TableForm extends Component {
     this.handleButtonClickEdith = this.handleButtonClickEdith.bind(this);
   }
 
+  componentDidMount() {
+    const filteredData = this.props.data;
+    this.setState({filteredData });
+  }
 
+  componentDidUpdate(prevProps, prevState) {
+    console.log("componentDidUpdate this.props.data", this.props.data)
+    console.log("componentDidUpdate prevProps", prevProps)
+    if (this.props.data.length != prevProps.data.length) {
+      const filteredData = this.props.data;
+      this.setState({filteredData });
+    }
+  }
+
+  handleSearchChange = (event) => {
+    const searchText = event.target.value;
+    const filteredData = this.props.data.filter((item) =>
+      Object.values(item)
+        .join(" ")
+        .toLowerCase()
+        .includes(searchText.toLowerCase())
+    );
+    this.setState({ searchText, filteredData });
+  };
 
   handleButtonClick() {
     this.props.history.push(`/admin/agregar`);
@@ -69,25 +95,40 @@ class TableForm extends Component {
 
   handleDelete = (id) => {
     this.props.onDelete(id);
+    const filteredData = this.props.data;
+    this.setState({filteredData });
   };
+
+  handleOpenModal() {
+    this.setState({ isOpen: true });
+  }
+
+  handleCloseModal() {
+    this.setState({ isOpen: false });
+  }
 
   render() {
 
 
-    const { data } = this.props;
+    const { filteredData } = this.props;
 
     return (
       <div className="container">
         <br />
         <div className="d-flex justify-content-between align-items-center">
         <Button  onClick={this.handleButtonClick} className="btn btn-secondary text-right">
-          Agregar Nuevo Producto
+            <FaPlusSquare />&nbsp;Agregar
         </Button>
         <Switch>
           <Route path="/admin/agregar" component={AgregarForm} />
         </Switch>
+        <input
+          type="text"
+          value={this.state.searchText}
+          onChange={this.handleSearchChange}
+          placeholder="Search..."
+        />
         </div>
-        <br />
         <br />
         <Table striped bordered hover size="sm">
           <thead>
@@ -103,7 +144,7 @@ class TableForm extends Component {
             </tr>
           </thead>
           <tbody>
-          {data.map((item, index) => (
+          {this.state.filteredData.map((item, index) => (
             <tr key={item._id}>
               <td>
                 <img

@@ -61,8 +61,9 @@ class AdminUser extends Component {
             <div className="AdminUser">
 
                 <Header isAuthenticated={isAuthenticated()}/>
-
-                <h3 className="text-center" >Admin Profile</h3>
+                <br></br>
+                <br></br>
+                <h5>Admin Profile</h5>
                 <Router>
                     <Switch>
                         <Route path="/admin/modificar/:id">
