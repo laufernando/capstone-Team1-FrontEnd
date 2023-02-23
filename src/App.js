@@ -11,7 +11,7 @@ import Agregar from "./pages/adminUser/Agregar";
 import Modificar from "./pages/adminUser/Modificar";
 import Shop from "./pages/buy/Buy";
 import GenderCatalog from "./pages/adminUser/AdminGender";
-import AgregarGender from "./pages/adminUser/AgregarGender";
+import PaymentCatalog from "./pages/adminUser/AdminPayment";
 import "./css/body.css";
 
 
@@ -66,8 +66,8 @@ function App() {
         />   
         <Route
           exact
-          path="/admin/agregargender"
-          component={AgregarGender}
+          path="/admin/payment"
+          component={PaymentCatalog}
         />   
         <Route
           exact

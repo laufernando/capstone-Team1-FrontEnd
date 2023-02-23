@@ -44,7 +44,7 @@ class GenderCatalog extends Component {
       };
 
           
-      handleSubmit = () => {
+     /* handleSubmit = () => {
 
         DataService
         .postGenderData
@@ -58,7 +58,7 @@ class GenderCatalog extends Component {
         .catch((error) => {
           console.log(error);
         });
-      };
+      };*/
 
     render() {
         return (
@@ -68,13 +68,14 @@ class GenderCatalog extends Component {
                 <br></br>
                 <br></br>
                 <h5>Catálogo de Género</h5>
+                <br></br>
                 
                 <Router>
                     <Switch>
                         <Route path="/admin/agregargender/">
                             <AgregarForm />
                         </Route>                        
-                        <Table data={this.state.data} onDelete={this.handleDelete} onSubmit={this.handleSubmit}/>
+                        <Table data={this.state.data} onDelete={this.handleDelete}/>
                     </Switch>
                 </Router>  
 
