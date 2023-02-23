@@ -1,18 +1,18 @@
-import { useState, useEffect }  from "react";
+import { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
 import Carousel from 'react-multi-carousel';
 import "react-multi-carousel/lib/styles.css";
 import Button from 'react-bootstrap/Button';
 import { MdOutlineAddShoppingCart } from "react-icons/md";
-import { Panel} from 'rsuite';
+import { BsFillTrashFill } from "react-icons/bs";
+import { Panel } from 'rsuite';
 
 
-function GridCards({ props, gendersData, sneakersData }) {
+function GridCards({ props, gendersData, sneakersData, count }) {
 
     const [query, setQuery] = useState("")
     const [cart, setCart] = useState([])
-
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
@@ -33,13 +33,21 @@ function GridCards({ props, gendersData, sneakersData }) {
         }
     };
     useEffect(() => {
-        localStorage.clear();
+        localStorage.removeItem('itemsproduct');
         localStorage.setItem('itemsproduct', JSON.stringify(cart));
-      });
-    const addProduct = (param) => {
-        setCart([...cart, param])
+    });
+    const Product = (param) => {
+        if (cart.includes(param)){
+            const filtredData = cart.filter(item => item !== param);
+            setCart(filtredData)
+        }else{
+            setCart([...cart, param])
+
+        }
         
     };
+
+    
 
     return (
         <div className="GridCards container mb-3">
@@ -47,9 +55,10 @@ function GridCards({ props, gendersData, sneakersData }) {
             <br />
             <Form.Group controlId="formBasicEmail">
                 <div className="input-with-icon-left">
-                    <Form.Control as="input" placeholder="Buscar Sneakers" onChange={event => setQuery(event.target.value)} style={{textAlign: 'center'}}></Form.Control>
+                    <Form.Control as="input" placeholder="Buscar Sneakers" onChange={event => setQuery(event.target.value)} style={{ textAlign: 'center' }}></Form.Control>
                 </div>
             </Form.Group>
+
 
             {
                 gendersData.map((postg, index) => (
@@ -71,7 +80,7 @@ function GridCards({ props, gendersData, sneakersData }) {
 
 
 
-                            { 
+                            {
                                 sneakersData.filter(post => {
                                     if (query === '') {
                                         return post;
@@ -100,10 +109,17 @@ function GridCards({ props, gendersData, sneakersData }) {
                                                             <br />
                                                             Genero: {post.genero}
                                                         </Card.Text>
-                                                        <Button variant="primary" onClick={() => addProduct(post._id)} ><MdOutlineAddShoppingCart /></Button>
+                                                        <Button variant="primary" onClick={() => Product(post._id)} >
+                                                            {cart.includes(post._id)
+                                                                ? <BsFillTrashFill />
+                                                                : <MdOutlineAddShoppingCart />
+                                                            }
+                                                        </Button>
                                                     </Card.Body>
                                                     <Card.Footer className="text-muted">Existencia:{post.cantidad}</Card.Footer>
                                                 </Card>
+
+
                                             </div>)
 
                                     }
@@ -111,11 +127,17 @@ function GridCards({ props, gendersData, sneakersData }) {
                             }
 
                         </Carousel>
+
                     </Panel>
+
+
 
                 ))
 
             }
+
+
+
 
         </div>
     );

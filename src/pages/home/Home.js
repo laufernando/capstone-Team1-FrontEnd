@@ -4,13 +4,19 @@ import { isAuthenticated } from "../../utils/authHelper";
 import { Component } from "react";
 
 class Home extends Component {
-  // Constructor 
+  
   state = {
-    errorMessage: null,
-    successMessage: null,
-    sneakers: [],
-    genders: []
-  }
+      errorMessage: null,
+      successMessage: null,
+      sneakers: [],
+      genders: [],
+      countProd : 0
+    }
+    
+  
+    
+ 
+  
   getSneakers = () => {
 
     //get API url from the environment variables
@@ -18,19 +24,21 @@ class Home extends Component {
 
     //use fetch to make an API call and get a specific student (returns a promise)
     fetch(`${apiURL}/api/sneaker`)
-        //on success of the fetch request, turn the response that came back into JSON
-        .then((response) => response.json())
-        //on success of turnig the response into JSON (data we can work with), lets add that data to state
-        .then((result) => {
+      //on success of the fetch request, turn the response that came back into JSON
+      .then((response) => response.json())
+      //on success of turnig the response into JSON (data we can work with), lets add that data to state
+      .then((result) => {
 
-            //update state with the data from the API causing the page to re-render
-            this.setState({sneakers: result});
-        })
-        //handle any errors/failures with getting data from the API
-        .catch((error) => {
-            console.log(error)
-        });
+        //update state with the data from the API causing the page to re-render
+        this.setState({ sneakers: result });
+      })
+      //handle any errors/failures with getting data from the API
+      .catch((error) => {
+        console.log(error)
+      });
   }
+
+
 
   getGenders = () => {
 
@@ -39,18 +47,18 @@ class Home extends Component {
 
     //use fetch to make an API call and get a specific student (returns a promise)
     fetch(`${apiURL}/api/gender`)
-        //on success of the fetch request, turn the response that came back into JSON
-        .then((response) => response.json())
-        //on success of turnig the response into JSON (data we can work with), lets add that data to state
-        .then((result) => {
+      //on success of the fetch request, turn the response that came back into JSON
+      .then((response) => response.json())
+      //on success of turnig the response into JSON (data we can work with), lets add that data to state
+      .then((result) => {
 
-            //update state with the data from the API causing the page to re-render
-            this.setState({genders: result});
-        })
-        //handle any errors/failures with getting data from the API
-        .catch((error) => {
-            console.log(error)
-        });
+        //update state with the data from the API causing the page to re-render
+        this.setState({ genders: result });
+      })
+      //handle any errors/failures with getting data from the API
+      .catch((error) => {
+        console.log(error)
+      });
   }
 
   componentDidMount() {
@@ -64,8 +72,8 @@ class Home extends Component {
   render() {
     return (
       <div className="Home">
-        <Header isAuthenticated={isAuthenticated()} />
-        <GridCards key={1} gendersData={this.state.genders} sneakersData={this.state.sneakers}/>
+        <Header isAuthenticated={isAuthenticated()}  />
+        <GridCards key={1} gendersData={this.state.genders} sneakersData={this.state.sneakers} count={this.state.countProd} />
       </div>
     );
   }
