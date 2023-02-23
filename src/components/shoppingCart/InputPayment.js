@@ -35,7 +35,7 @@ function InputPayment() {
   const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("itemsproduct", JSON.stringify(["63ec6d2c1202b1cc9019f13b", "63ec6d651202b1cc9019f13e", "63f5e10eef5ee92785a84407"]));
+    //localStorage.setItem("itemsproduct", JSON.stringify(["63ec6d2c1202b1cc9019f13b", "63ec6d651202b1cc9019f13e", "63f5e10eef5ee92785a84407"]));
     console.log(":::: local values ::::" + localStorage.getItem("itemsproduct"));
     service.getDataByItems(localStorage.getItem("itemsproduct"))
       .then((response) => {

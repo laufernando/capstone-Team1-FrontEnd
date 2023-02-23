@@ -34,7 +34,7 @@ function GridCards({ props, gendersData, sneakersData }) {
     };
     useEffect(() => {
         localStorage.clear();
-        localStorage.setItem('Carrito', cart);
+        localStorage.setItem('itemsproduct', JSON.stringify(cart));
       });
     const addProduct = (param) => {
         setCart([...cart, param])
