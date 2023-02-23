@@ -90,8 +90,7 @@ function InputPayment() {
     history.push(`/`);
   };
 
-  const handleConfirm = () => {
-    handleClose();
+  const handleCancel = () => {
     history.push(`/`);
   }
 
@@ -392,9 +391,20 @@ function InputPayment() {
                 <Form.Label>Total{' '}{totalAmount}</Form.Label>
                </Form.Group>
 
-              <Button variant="primary" onClick={handleSubmit} >
-                Submit
-              </Button>
+
+              <Row className="g-2">
+                    <Col md>
+                      <Button variant="primary" onClick={handleSubmit} >
+                        Submit
+                      </Button>
+                    </Col>
+                    <Col md>
+                      <Button variant="primary" onClick={handleCancel} >
+                        Cancel
+                      </Button>
+                    </Col>
+                  </Row >
+
             </Form>
           </Col>
         </Row>
