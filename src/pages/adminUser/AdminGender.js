@@ -8,6 +8,8 @@ import Header from "../../components/header/Header";
 
 import Table from "../../components/tableForm/TableGender";
 import AgregarForm from "../../components/agregarForm/GenderForm";
+import { isAuthenticated } from "../../utils/authHelper";
+import mustBeAuthenticated from "../../redux/hoc/mustBeAuthenticated";
 import "../../css/body.css"
 
 
@@ -62,9 +64,9 @@ class GenderCatalog extends Component {
 
     render() {
         return (
+          
             <div className="GenderCatalog">
-
-                <Header />
+              <Header isAuthenticated={isAuthenticated()}/>
                 <br></br>
                 <br></br>
                 <h5>Catálogo de Género</h5>
@@ -84,4 +86,4 @@ class GenderCatalog extends Component {
     }
 }
 
-export default  GenderCatalog
+export default  mustBeAuthenticated(GenderCatalog)

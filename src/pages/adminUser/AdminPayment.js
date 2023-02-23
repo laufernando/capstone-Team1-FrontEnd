@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-
-import Alert from 'react-bootstrap/Alert';
 import DataService from "../../services/CatalogService";
 
 import Header from "../../components/header/Header";
 
 import Table from "../../components/tableForm/TablePayment";
-import AgregarForm from "../../components/agregarForm/PaymentForm";
+import mustBeAuthenticated from "../../redux/hoc/mustBeAuthenticated";
+import { isAuthenticated } from "../../utils/authHelper";
 import "../../css/body.css"
 
 
@@ -43,38 +41,30 @@ class PaymentCatalog extends Component {
       });
   };
 
+  updateData = () => {
+    console.log('Ejecuta esta funcion')
+    DataService.getPaymentData().then((result) => {
+        this.setState({ data: result });
+        alert('entroupdate: ');
+    });
+    console.log('Actualiza el estado')
+}
 
-  /* handleSubmit = () => {
-
-     DataService
-     .postGenderData
-     .then((response) => {
-       console.log(response.data);
-       alert('Se borro el genero con id');
-       DataService.getGenderData().then((result) => {
-         this.setState({ data: result });
-       });
-     })
-     .catch((error) => {
-       console.log(error);
-     });
-   };*/
 
   render() {
     return (
       <div className="PaymentCatalog">
-
-        <Header />
+         <Header isAuthenticated={isAuthenticated()}/>
         <br></br>
         <br></br>
         <h5>Método de Pago</h5>
         <br></br>
 
-        <Table data={this.state.data} onDelete={this.handleDelete} />
+        <Table data={this.state.data} onDelete={this.handleDelete} {...this.props} updateData={this.updateData}/>
 
       </div>
     )
   }
 }
 
-export default PaymentCatalog
+export default mustBeAuthenticated(PaymentCatalog)

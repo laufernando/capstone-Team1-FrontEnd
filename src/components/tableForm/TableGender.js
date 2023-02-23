@@ -53,11 +53,13 @@ class TableGender extends Component {
 
 
         const handleSubmit = (e) => {
-            // e.preventDefault();
+             //e.preventDefault();
             const genero = e.target[0].value;
             const datos = JSON.stringify({ gender: genero });
             DataService.postGenderData(datos)
             console.log("datos: " + datos)
+            window.location.reload;
+            alert('género registrado con éxito')
             this.handleCloseModal();
         }
 

@@ -23,6 +23,7 @@ class TableGender extends Component {
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
         this.handleDeleteData = this.handleDeleteData.bind(this);
+        this.handleGetDta = this.handleGetDta.bind(this);
     }
 
     handleOpenModal() {
@@ -42,9 +43,13 @@ class TableGender extends Component {
 
     }
 
-
-
-
+    handleGetDta(datos){
+       //this.props.updateData;
+       alert('agregando nuevo método de pago');
+       window.location.reload;
+    }
+      
+       
 
     render() {
 
@@ -53,11 +58,12 @@ class TableGender extends Component {
 
 
         const handleSubmit = (e) => {
-            // e.preventDefault();
+             //e.preventDefault();
             const metodo = e.target[0].value;
             const datos = JSON.stringify({ paymentMethod: metodo });
             DataService.postPaymentData(datos)
             console.log("datos: " + datos)
+            this.handleGetDta(datos);
             this.handleCloseModal();
         }
 

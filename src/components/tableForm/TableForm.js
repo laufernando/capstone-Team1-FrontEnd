@@ -119,7 +119,7 @@ class TableForm extends Component {
               <td>{item.cantidad}</td>
               <td>{item.precio}</td>
               <td style={{ textAlign: "center" }}>
-                <DropdownButton variant="secondary" title="" id="dropdown-menu">
+                <DropdownButton variant="primary" title="" id="dropdown-menu">
                   <Dropdown.Item onClick={() => this.handleEdit(item._id)} className="dropdown-item-small">Edit   <FaEdit /></Dropdown.Item>
                   <Dropdown.Item onClick={() => this.handleDelete(item._id)} className="dropdown-item-small">Delete <FaTrashAlt /></Dropdown.Item>
                 </DropdownButton>{' '}
