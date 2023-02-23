@@ -56,6 +56,10 @@ function InputPayment() {
 
   }, []);
 
+  if (!paymentsMethods) {
+    return <div>Cargando...</div>;
+  }
+
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',

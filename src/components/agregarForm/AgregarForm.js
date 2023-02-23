@@ -182,13 +182,13 @@ const AgregarForm = (props) => {
                     </InputGroup>
                 </Form.Group>
                 <div className="button-group">
+                    <Button variant="primary" type="submit" >
+                        Agregar
+                    </Button>                      
+                    <span>&nbsp;&nbsp;</span>
                     <Button variant="primary" onClick={handleClickCancel}>
                         Cancelar
                     </Button> 
-                    <span>&nbsp;&nbsp;</span>
-                    <Button variant="primary" type="submit" >
-                        Agregar
-                    </Button>   
                 </div>            
             </Form>
         </div>

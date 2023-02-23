@@ -99,13 +99,18 @@ class TableForm extends Component {
     this.setState({filteredData });
   };
 
-  handleOpenModal() {
-    this.setState({ isOpen: true });
-  }
+  handleConfirmDelete = () => {
+    // Eliminar el elemento aquí
+    this.setState({
+      showConfirmationModal: false,
+    });
+  };
 
-  handleCloseModal() {
-    this.setState({ isOpen: false });
-  }
+  handleCloseModal = () => {
+    this.setState({
+      showConfirmationModal: false,
+    });
+  };
 
   render() {
 
@@ -169,7 +174,11 @@ class TableForm extends Component {
           ))}
           </tbody>
         </Table>
-        
+        <Modal show={showConfirmationModal} onClose={this.handleCloseModal}>
+          <h2>¿Está seguro de eliminar?</h2>
+          <button onClick={this.handleConfirmDelete}>Sí</button>
+          <button onClick={this.handleCloseModal}>No</button>
+        </Modal>
       </div>
     );
   }
