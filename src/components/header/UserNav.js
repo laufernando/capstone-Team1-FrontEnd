@@ -51,8 +51,7 @@ function UserNav(props) {
           <Dropdown.Menu>
             <Dropdown.Item href="/admin">Admin Console</Dropdown.Item>
             <Dropdown.Item href="/admin/gender">Admin Gender</Dropdown.Item>
-            <Dropdown.Item >Admin Payment Method</Dropdown.Item>
-            <Dropdown.Item >Admin size sneaker</Dropdown.Item>
+            <Dropdown.Item href="/admin/payment">Admin Payment Method</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
         <Nav.Link onClick={handleSignOut}>Sign Out</Nav.Link>
