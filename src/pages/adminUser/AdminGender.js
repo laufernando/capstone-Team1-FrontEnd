@@ -50,7 +50,7 @@ class GenderCatalog extends Component {
         .postGenderData
         .then((response) => {
           console.log(response.data);
-          alert('Se borro el genero con id: '+id);
+          alert('Se borro el genero con id');
           DataService.getGenderData().then((result) => {
             this.setState({ data: result });
           });
