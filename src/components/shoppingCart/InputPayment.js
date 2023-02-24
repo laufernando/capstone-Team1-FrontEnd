@@ -34,6 +34,38 @@ function InputPayment() {
   const [validated, setValidated] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+
+  const createCurrentUnits = (index, jsonSneakers) => {
+    const imgtag = document.getElementById(index);
+    let idsneaker = imgtag.dataset.value;
+    let sneakerUnits = jsonSneakers.filter(function (snk) { return snk._id == idsneaker; })
+    let total = sneakerUnits.map(snk => snk.precio).reduce((acc, amount) => acc + amount);
+    /*let total=0;
+    jsonSneakers.forEach(snk => total+=snk.precio);*/
+
+    //"1 Unit {formatter.format(currentPrice)}"
+     let currentUnits = sneakerUnits.length+((sneakerUnits.length>1)?" Units ":" Unit ")+formatter.format(total);
+     setCurrentUnits(currentUnits);
+     setNumberUnits(sneakerUnits.length);
+  };
+  const sumTotalAmount=(jsonSneakers)=>{
+    let monto = jsonSneakers.map(snk => snk.precio).reduce((acc, amount) => acc + amount);
+
+   /* const numbers = [1, 2, 3];
+
+    let total = 0;
+    numbers.forEach(num => total += num);
+    
+    console.log(total) // 6 */
+    /*let monto = 0;
+    jsonSneakers.forEach(snk => monto+=snk.precio);*/
+
+    setTotalAmout(formatter.format(monto));
+ }
   useEffect(() => {
     //localStorage.setItem("itemsproduct", JSON.stringify(["63ec6d2c1202b1cc9019f13b", "63ec6d651202b1cc9019f13e", "63f5e10eef5ee92785a84407"]));
     console.log(":::: local values ::::" + localStorage.getItem("itemsproduct"));
@@ -48,8 +80,8 @@ function InputPayment() {
       });
 
       service.getMethodsPayment()
-        .then((response) => {
-           setPaymentMethods(response);
+        .then((response2) => {
+           setPaymentMethods(response2);
         }).catch((error) => {
           console.log(error);
         });
@@ -60,10 +92,8 @@ function InputPayment() {
     return <div>Cargando...</div>;
   }
 
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  });
+
+  
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -94,36 +124,6 @@ function InputPayment() {
     history.push(`/`);
   }
 
-
-  const createCurrentUnits = (index, jsonSneakers) => {
-    const imgtag = document.getElementById(index);
-    let idsneaker = imgtag.dataset.value;
-    let sneakerUnits = jsonSneakers.filter(function (snk) { return snk._id == idsneaker; })
-    let total = sneakerUnits.map(snk => snk.precio).reduce((acc, amount) => acc + amount);
-    /*let total=0;
-    jsonSneakers.forEach(snk => total+=snk.precio);*/
-
-    //"1 Unit {formatter.format(currentPrice)}"
-     let currentUnits = sneakerUnits.length+((sneakerUnits.length>1)?" Units ":" Unit ")+formatter.format(total);
-     setCurrentUnits(currentUnits);
-     setNumberUnits(sneakerUnits.length);
-  };
-
-  const sumTotalAmount=(jsonSneakers)=>{
-     let monto = jsonSneakers.map(snk => snk.precio).reduce((acc, amount) => acc + amount);
-
-    /* const numbers = [1, 2, 3];
-
-     let total = 0;
-     numbers.forEach(num => total += num);
-     
-     console.log(total) // 6 */
-     /*let monto = 0;
-     jsonSneakers.forEach(snk => monto+=snk.precio);*/
-
-     setTotalAmout(formatter.format(monto));
-  }
-
   const guest = {
     "name": name,
     "email": email,
@@ -139,6 +139,7 @@ function InputPayment() {
 
 
   const handleClick = () => {
+    let message= {  };
     console.log("::::: test succefull ::::::::" + JSON.stringify(guest));
     service.createGuest(JSON.stringify(guest)).then((response) => {
       console.log(":::::::: Response:" + JSON.stringify(response));
@@ -146,13 +147,16 @@ function InputPayment() {
          saveShoppingCart(sneaker._id,response._id);
       });
 
-        /*service.sendMailConfirm(response)
-        .then((mailresponse) => {
-            console.log(":::::::: Response:" + JSON.stringify(mailresponse));
-        }).catch((mailerror) => {
-            console.log(mailerror);
-        });*/
+      message= {
+        "name": guest.name,
+        "email":guest.email ,
+        "subject": "Purchase notification",
+        "units": units.length,
+        "total": totalAmount,
+        "address":guest.address
+      };
 
+      sendMailShoppingCart(message);
       handleClose();
       handleShowSuccess();
      // history.push(`/`);
@@ -162,6 +166,15 @@ function InputPayment() {
 
   }
 
+  const sendMailShoppingCart = (message) => {
+    console.log(JSON.stringify(message));
+      service.sendMailConfirm(JSON.parse(JSON.stringify(message)))
+      .then((mailresponse) => {
+          console.log(":::::::: Response:" + JSON.stringify(mailresponse));
+      }).catch((mailerror) => {
+          console.log(mailerror);
+      });
+  }   
   const saveShoppingCart = (sneakerid,guestid) => {
     let today = new Date();
     let dd = today.getDate();
@@ -176,12 +189,13 @@ function InputPayment() {
       "unit": sneakerUnits.length
     }
       service.saveShoppingCart(JSON.stringify(cart)).then((response) => {
-      console.log(":::::::: Response shopping cart:" + JSON.stringify(response));
+     // console.log(":::::::: Response shopping cart:" + JSON.stringify(response));
     }).catch((error) => {
       console.log(error);
     });
   }
 
+    
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
     console.log("::::current index :::::::" + selectedIndex);
