@@ -7,12 +7,13 @@ import * as authActions from "../../redux/actions/auth";
 import { bindActionCreators } from "redux";
 import { FaShoppingCart } from "react-icons/fa";
 import Dropdown from 'react-bootstrap/Dropdown';
-
+import { useState,useEffect } from "react";
 import AuthService from "../../authService";
 
 function UserNav(props) {
   let client = new AuthService();
-
+  const [prod, setProd] = useState(props.prodCount)
+  let numProd = 0;
 
   let handleSignOut = (event) => {
     client.logout(props.auth.token).then((response) => {
@@ -33,7 +34,7 @@ function UserNav(props) {
       </Navbar.Text>
       <Nav.Link as={Link} to="/login" href="/login" >Sign in</Nav.Link>
       <Nav.Link as={Link} to="/register" href="/register">Register</Nav.Link>
-      <Nav.Link as={Link} to="/shop" href="/shop"><FaShoppingCart /><Badge bg="secondary">0</Badge></Nav.Link>
+      <Nav.Link as={Link} to="/shop" href="/shop"><FaShoppingCart /><Badge bg="secondary">{props.prodCount}</Badge></Nav.Link>
     </>
   )
   if (props.isAuthenticated) {
@@ -55,7 +56,7 @@ function UserNav(props) {
           </Dropdown.Menu>
         </Dropdown>
         <Nav.Link onClick={handleSignOut}>Sign Out</Nav.Link>
-        <Nav.Link as={Link} to="/shop" href="/shop"><FaShoppingCart /><Badge bg="secondary">0</Badge></Nav.Link>
+        <Nav.Link as={Link} to="/shop" href="/shop"><FaShoppingCart /><Badge bg="secondary">{props.prodCount}</Badge></Nav.Link>
         
       </>
     )

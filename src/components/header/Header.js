@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import UserNav from './UserNav';
 import '../../css/nav-style.css';
 import Logo from '../../images/shoe.png';
-import { GiRunningShoe } from "react-icons/gi";
+import { useState } from "react";
 function Header(props) {
 
   return (
@@ -16,6 +16,7 @@ function Header(props) {
           <Nav activeKey={props.location.pathname} className="ml-auto">
             <UserNav
               isAuthenticated={props.isAuthenticated}
+              prodCount ={props.countProd}
             />
           </Nav>
         </Navbar.Collapse>

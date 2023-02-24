@@ -3,6 +3,7 @@ import GridCards from "../../components/gridcards/GridCards";
 import { isAuthenticated } from "../../utils/authHelper";
 import { Component } from "react";
 
+
 class Home extends Component {
   
   state = {
@@ -10,11 +11,15 @@ class Home extends Component {
       successMessage: null,
       sneakers: [],
       genders: [],
-      countProd : 0
+      numProduct: 0
     }
     
+    updateCounProd = (t) => {
+      this.setState({numProduct:t})
+    };
   
-    
+    componentDidUpdate(prevProps, prevState) {
+    }
  
   
   getSneakers = () => {
@@ -70,10 +75,11 @@ class Home extends Component {
 
 
   render() {
+    
     return (
       <div className="Home">
-        <Header isAuthenticated={isAuthenticated()}  />
-        <GridCards key={1} gendersData={this.state.genders} sneakersData={this.state.sneakers} count={this.state.countProd} />
+        <Header isAuthenticated={isAuthenticated()}  countProd={this.state.numProduct}/>
+        <GridCards key={1} gendersData={this.state.genders} sneakersData={this.state.sneakers} updateCounProd={this.updateCounProd} />
       </div>
     );
   }

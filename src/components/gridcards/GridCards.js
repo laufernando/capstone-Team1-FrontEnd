@@ -9,10 +9,12 @@ import { BsFillTrashFill } from "react-icons/bs";
 import { Panel } from 'rsuite';
 
 
-function GridCards({ props, gendersData, sneakersData, count }) {
+function GridCards({ props, gendersData, sneakersData, updateCounProd}) {
 
     const [query, setQuery] = useState("")
     const [cart, setCart] = useState([])
+    const [prod, setProd] = useState(0)
+
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
@@ -35,15 +37,22 @@ function GridCards({ props, gendersData, sneakersData, count }) {
     useEffect(() => {
         localStorage.removeItem('itemsproduct');
         localStorage.setItem('itemsproduct', JSON.stringify(cart));
-    });
+        
+    },[prod]);
     const Product = (param) => {
         if (cart.includes(param)){
             const filtredData = cart.filter(item => item !== param);
             setCart(filtredData)
+            setProd(prod-1)
+            updateCounProd(prod-1);
+            
         }else{
             setCart([...cart, param])
-
+            setProd(prod+1)
+            updateCounProd(prod+1);
         }
+        
+        
         
     };
 
@@ -109,7 +118,7 @@ function GridCards({ props, gendersData, sneakersData, count }) {
                                                             <br />
                                                             Genero: {post.genero}
                                                         </Card.Text>
-                                                        <Button variant="primary" onClick={() => Product(post._id)} >
+                                                        <Button variant="primary" onClick={() => {Product(post._id)}} >
                                                             {cart.includes(post._id)
                                                                 ? <BsFillTrashFill />
                                                                 : <MdOutlineAddShoppingCart />
