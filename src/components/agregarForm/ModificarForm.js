@@ -159,12 +159,12 @@ const ModificarForm = (props) => {
 
                 <Form.Group controlId="descripcion">
                     <Form.Label><strong>Description:</strong></Form.Label>
-                    <Form.Control required minLength="2"  type="text"  value={descripcion} placeholder="Description" onChange={handleDescripcionChange} />
+                    <Form.Control required minLength="1"  type="text"  value={descripcion} placeholder="Description" onChange={handleDescripcionChange} />
                 </Form.Group>
 
                 <Form.Group controlId="cantidad">
                     <Form.Label><strong>Quantity</strong></Form.Label>
-                    <Form.Control required minLength="2"  type="text" value={cantidad} placeholder="Quantity" onChange={handleCantidadChange}/>
+                    <Form.Control required minLength="1"  type="text" value={cantidad} placeholder="Quantity" onChange={handleCantidadChange}/>
                 </Form.Group>
 
                 <Form.Group controlId="precio">

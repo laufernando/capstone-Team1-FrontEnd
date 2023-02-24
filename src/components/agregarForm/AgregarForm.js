@@ -165,12 +165,12 @@ const AgregarForm = (props) => {
 
                 <Form.Group controlId="descripcion">
                     <Form.Label><strong>Description:</strong></Form.Label>
-                    <Form.Control required minLength="2"  type="text" placeholder="Description" value={descripcion} onChange={handleDescripcionChange}/>
+                    <Form.Control required minLength="1"  type="text" placeholder="Description" value={descripcion} onChange={handleDescripcionChange}/>
                 </Form.Group>
 
                 <Form.Group controlId="cantidad">
                     <Form.Label><strong>Quantity</strong></Form.Label>
-                    <Form.Control required minLength="2"  type="text" placeholder="Quantity" value={cantidad} onChange={handleCantidadChange}/>
+                    <Form.Control required minLength="1"  type="text" placeholder="Quantity" value={cantidad} onChange={handleCantidadChange}/>
                 </Form.Group>
 
                 <Form.Group controlId="precio">
