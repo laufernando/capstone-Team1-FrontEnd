@@ -134,13 +134,13 @@ class TableForm extends Component {
           <thead>
             <tr>
               <th></th>
-              <th>Marca</th>
-              <th>Genero</th>
-              <th>Talla</th>
-              <th>Descripcion</th>
-              <th>Cantidad</th>
-              <th>Precio</th>
-              <th>Opciones</th>
+              <th>Brand</th>
+              <th>Gender</th>
+              <th>size</th>
+              <th>Description</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Options</th>
             </tr>
           </thead>
           <tbody>

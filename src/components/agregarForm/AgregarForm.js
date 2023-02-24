@@ -136,22 +136,22 @@ const AgregarForm = (props) => {
 
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="marca">
-                    <Form.Label><strong>Marca:</strong></Form.Label>
-                    <Form.Control required minLength="2"  type="text" placeholder="Marca" value={marca} onChange={handleMarcaChange}/>
+                    <Form.Label><strong>Brand:</strong></Form.Label>
+                    <Form.Control required minLength="2"  type="text" placeholder="Brand" value={marca} onChange={handleMarcaChange}/>
                 </Form.Group>
                 <Form.Group controlId="genero">
-                    <Form.Label><strong>Genero:</strong></Form.Label>
+                    <Form.Label><strong>Gender:</strong></Form.Label>
                     <Form.Control required as="select"  aria-label="Default select example" value={genero} onChange={handleGeneroChange}>
-                        <option>Selecciona el Genero</option>
+                        <option>Select gender</option>
                         {genders.map(option => (
                         <option key={option._id} value={option.gender}>{option.gender}</option>
                         ))}
                     </Form.Control >
                 </Form.Group>
                 <Form.Group controlId="talla">
-                    <Form.Label><strong>Talla:</strong></Form.Label>
+                    <Form.Label><strong>Size:</strong></Form.Label>
                     <Form.Control required as="select" aria-label="Default select example" value={talla} onChange={handleTallaChange}>
-                        <option>Selecciona la Talla</option>
+                        <option>Select size</option>
                         {sizes.map(option => (
                         <option key={option._id} value={option.size}>{option.size}</option>
                         ))}
@@ -159,22 +159,22 @@ const AgregarForm = (props) => {
                 </Form.Group>
 
                 <Form.Group controlId="img" className="mb-3">
-                    <Form.Label><strong>Imagen:</strong></Form.Label>
+                    <Form.Label><strong>Image:</strong></Form.Label>
                     <Form.Control required type="file"  onChange={handleFileChange} />
                 </Form.Group>
 
                 <Form.Group controlId="descripcion">
-                    <Form.Label><strong>Descripcion:</strong></Form.Label>
-                    <Form.Control required minLength="2"  type="text" placeholder="Descripcion" value={descripcion} onChange={handleDescripcionChange}/>
+                    <Form.Label><strong>Description:</strong></Form.Label>
+                    <Form.Control required minLength="2"  type="text" placeholder="Description" value={descripcion} onChange={handleDescripcionChange}/>
                 </Form.Group>
 
                 <Form.Group controlId="cantidad">
-                    <Form.Label><strong>Cantidad</strong></Form.Label>
-                    <Form.Control required minLength="2"  type="text" placeholder="Cantidad" value={cantidad} onChange={handleCantidadChange}/>
+                    <Form.Label><strong>Quantity</strong></Form.Label>
+                    <Form.Control required minLength="2"  type="text" placeholder="Quantity" value={cantidad} onChange={handleCantidadChange}/>
                 </Form.Group>
 
                 <Form.Group controlId="precio">
-                    <Form.Label><strong>Precio:</strong></Form.Label>
+                    <Form.Label><strong>Price:</strong></Form.Label>
                     <InputGroup className="mb-3">
                         <InputGroup.Text>$</InputGroup.Text>
                         <Form.Control required aria-label="Amount (to the nearest dollar)" value={precio} onChange={handlePrecioChange}/>
@@ -183,11 +183,11 @@ const AgregarForm = (props) => {
                 </Form.Group>
                 <div className="button-group">
                     <Button variant="primary" type="submit" >
-                        Agregar
+                        Add
                     </Button>                      
                     <span>&nbsp;&nbsp;</span>
                     <Button variant="primary" onClick={handleClickCancel}>
-                        Cancelar
+                        Cancel
                     </Button> 
                 </div>            
             </Form>

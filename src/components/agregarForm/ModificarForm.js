@@ -130,22 +130,22 @@ const ModificarForm = (props) => {
 
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="marca">
-                    <Form.Label><strong>Marca:</strong></Form.Label>
-                    <Form.Control required minLength="2" value={marca} type="text" placeholder="Marca" onChange={handleMarcaChange}/>
+                    <Form.Label><strong>Brand:</strong></Form.Label>
+                    <Form.Control required minLength="2" value={marca} type="text" placeholder="Brand" onChange={handleMarcaChange}/>
                 </Form.Group>
                 <Form.Group controlId="genero">
-                    <Form.Label><strong>Genero:</strong></Form.Label>
+                    <Form.Label><strong>Gender:</strong></Form.Label>
                     <Form.Control  as="select" value={genero} onChange={handleGeneroChange} >
-                        <option>Selecciona el Genero</option>
+                        <option>Select gender</option>
                         {genders.map(option => (
                         <option key={option._id} value={option.gender}>{option.gender}</option>
                         ))}
                     </Form.Control >
                 </Form.Group>
                 <Form.Group controlId="talla">
-                    <Form.Label><strong>Talla:</strong></Form.Label>
+                    <Form.Label><strong>Size:</strong></Form.Label>
                     <Form.Control as="select" value={talla} onChange={handleTallaChange}>
-                        <option>Selecciona la Talla</option>
+                        <option>Select size</option>
                         {sizes.map(option => (
                         <option key={option._id} value={option.size}>{option.size}</option>
                         ))}
@@ -153,22 +153,22 @@ const ModificarForm = (props) => {
                 </Form.Group>
 
                 <Form.Group controlId="img" className="mb-3">
-                    <Form.Label><strong>Imagen:</strong></Form.Label>
+                    <Form.Label><strong>Image:</strong></Form.Label>
                     <Form.Control type="file" onChange={handleFileChange}/>
                 </Form.Group>
 
                 <Form.Group controlId="descripcion">
-                    <Form.Label><strong>Descripcion:</strong></Form.Label>
-                    <Form.Control required minLength="2"  type="text"  value={descripcion} placeholder="Descripcion" onChange={handleDescripcionChange} />
+                    <Form.Label><strong>Description:</strong></Form.Label>
+                    <Form.Control required minLength="2"  type="text"  value={descripcion} placeholder="Description" onChange={handleDescripcionChange} />
                 </Form.Group>
 
                 <Form.Group controlId="cantidad">
-                    <Form.Label><strong>Cantidad</strong></Form.Label>
-                    <Form.Control required minLength="2"  type="text" value={cantidad} placeholder="Cantidad" onChange={handleCantidadChange}/>
+                    <Form.Label><strong>Quantity</strong></Form.Label>
+                    <Form.Control required minLength="2"  type="text" value={cantidad} placeholder="Quantity" onChange={handleCantidadChange}/>
                 </Form.Group>
 
                 <Form.Group controlId="precio">
-                    <Form.Label><strong>Precio:</strong></Form.Label>
+                    <Form.Label><strong>Price:</strong></Form.Label>
                     <InputGroup className="mb-3">
                         <InputGroup.Text>$</InputGroup.Text>
                         <Form.Control aria-label="Amount (to the nearest dollar)" value={precio} onChange={handlePrecioChange} />
@@ -178,11 +178,11 @@ const ModificarForm = (props) => {
                 <div className="form-row">
                     <div className="form-group col-md-12">  
                     <Button type="submit" className="btn btn-primary mr-2">
-                        Modificar
+                        Modify
                     </Button>                     
                     <span>&nbsp;&nbsp;</span>                  
                     <Button className="btn btn-secondary" onClick={handleClickCancel}>
-                        Cancelar
+                        Cancel
                     </Button>
                     </div>
                 </div>
