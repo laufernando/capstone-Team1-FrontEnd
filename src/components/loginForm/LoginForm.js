@@ -1,12 +1,15 @@
 import React from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import login from '../../images/usuario.png';
 
 function LoginForm({handleChange, handleSubmit, formData}) {
     return (
-            <div className="LoginForm container">
-
-                <h3 className="text-center" >User Login</h3>
+            <div className="LoginForm container" style={{width: "20%"}}>
+                <br></br>
+                <div className="container" style={{display: "flex", width: "100%",justifyContent: "center"}}>
+               <img width="170px" height="120px" src={login}></img>
+               </div>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="email">
                         <Form.Label><strong>E-mail:</strong></Form.Label>
@@ -18,7 +21,7 @@ function LoginForm({handleChange, handleSubmit, formData}) {
                         <Form.Control onChange={handleChange} value={formData.password} type="password" placeholder="Password" />
                     </Form.Group>
                     <Button variant="primary" type="submit">
-                        Submit
+                        Log In
                     </Button>
                 </Form>
             </div>
