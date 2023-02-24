@@ -117,7 +117,7 @@ class TableForm extends Component {
         <br />
         <div className="d-flex justify-content-between align-items-center">
         <Button  onClick={this.handleButtonClick} className="btn btn-secondary text-right">
-            <FaPlusSquare />&nbsp;Agregar
+            <FaPlusSquare />&nbsp;Add
         </Button>
         <Switch>
           <Route path="/admin/agregar" component={AgregarForm} />
